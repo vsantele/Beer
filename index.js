@@ -41,7 +41,7 @@ async function getLast() {
 //   }
 // })
 
-app.post('/data', async function(req, res) {
+app.get('/data', async function(req, res) {
   console.log(req.query.temperature)
   if(req.query.temperature > 20) {
     console.log(`Temperature trop haute!(${req.query.temperature})`)
