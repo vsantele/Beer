@@ -1,5 +1,7 @@
 const sqlite3 = require('sqlite3').verbose()
 const express = require("express")
+const moment = require('moment')
+require('moment-timezone')
 
 const app = express();
 const db = new sqlite3.Database('./data.db')
@@ -31,19 +33,24 @@ async function getLast() {
   return data
 }
 
+app.use(express.static('./static'))
 
-// app.get('/data', async function(req, res) {
-//   try {
-//     getLast(res)
-//   } catch (error) {
-//     console.log('error :', error);
-//     res.send("error", error)
-//   }
-// })
+app.get('/all', async function(req, res) {
+  let limit = req.query.limit || 5
+  db.all(`SELECT id, temperature, humidite, timestamp, etat FROM data
+  ORDER BY id DESC
+  LIMIT ?;`, [limit], function(err, rows) {
+    if (err) {
+      throw err
+    }
+    console.log('data :', rows);
+    res.send(rows)
+  })
+})
 
 app.get('/data', async function(req, res) {
   console.log(req.query.temperature)
-  if(req.query.temperature > 20) {
+  if(req.query.temperature > 25) {
     console.log(`Temperature trop haute!(${req.query.temperature})`)
     etat = false
   } else if (req.query.temperature < 15) {
@@ -56,6 +63,14 @@ app.get('/data', async function(req, res) {
   
   res.send("Got post request")
 
+})
+
+app.get('/7-days', async function (req, res) {
+  db.all(`SELECT timestamp, temperature, humidite FROM data WHERE timestamp > ?`,[moment().tz("UTC").subtract(7, "days").format('YYYY-MM-DD H:mm:ss')],(err, rows) => {
+    if (err) throw err;
+    console.log(rows)
+    res.send(rows)
+  })
 })
 
 app.listen(3000, function() {
