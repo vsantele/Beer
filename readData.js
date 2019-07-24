@@ -2,7 +2,7 @@ const sqlite3 = require('sqlite3').verbose()
 
 const nbLast = process.argv[2] || 5
 
-const sql = `SELECT * FROM data ORDER BY id DESC LIMIT ${nbLast}`
+const sql = `SELECT * FROM data ORDER BY id ASC LIMIT ${nbLast}`
 
 const db = new sqlite3.Database('./data.db')
 
