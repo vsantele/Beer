@@ -4,11 +4,8 @@ fetch('/7-days')
     return res.json()
   })
   .then(data => {
-    console.log(data)
     let dates = data.map(row => row.timestamp).map(date => moment.utc(date).format("L LTS"))
-    console.log('dates :', dates);
     let temp = data.map(row => row.temperature)
-    console.log('temp :', temp);
     var chart = new Chart(ctx, {
       // The type of chart we want to create
       type: 'line',
@@ -29,3 +26,6 @@ fetch('/7-days')
     });
   })
 
+const tempsRestant = document.getElementById('tempsWeekReste')
+var dateBout = moment("2019-08-12")
+tempsRestant.textContent = dateBout.fromNow()
