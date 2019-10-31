@@ -3,6 +3,8 @@ const express = require("express")
 const moment = require('moment')
 require('moment-timezone')
 
+const PORT = process.env.PORT || 3000
+
 const app = express();
 const db = new sqlite3.Database('./data.db')
 
@@ -73,6 +75,6 @@ app.get('/7-days', async function (req, res) {
   })
 })
 
-app.listen(3000, function() {
-  console.log("App listening on port 3000")
+app.listen(PORT, function() {
+  console.log("App listening on port "+ PORT)
 })
