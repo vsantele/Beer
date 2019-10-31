@@ -1,5 +1,5 @@
 var ctx = document.getElementById('myChart').getContext('2d');
-fetch('/7-days')
+fetch('/2-days')
   .then(res => {
     return res.json()
   })
