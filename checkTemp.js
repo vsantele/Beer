@@ -16,16 +16,8 @@ db.get(sql, [], (err, row) => {
     if(row.temperature > 25) title += `\uD83D\uDD25`
     else title += `\u2744`
     
-    pusher.note('vic16@hotmail.be', title, msg, (err, res) =>{
+    pusher.note(process.env.EMAIL, title, msg, (err, res) =>{
       if (err) throw err;
     })
   }
 })
-
-
-/* 
-  DEVICES:
-  PC-Portable: 'ujDyoQ0xD40sjC2nMzCNjg'
-  GSM: 'ujDyoQ0xD40sjAreMkVTQ4'
-  PC-Fixe: 'ujDyoQ0xD40sjz1KiZlY9A'
-*/
