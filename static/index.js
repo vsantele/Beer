@@ -4,25 +4,35 @@ fetch('/2-days')
     return res.json()
   })
   .then(data => {
-    let dates = data.map(row => row.timestamp).map(date => moment.utc(date).format("L LTS"))
+    let dates = data.map(row => row.timestamp).map(date => moment.utc(date).format("DD/MM LT"))
     let temp = data.map(row => row.temperature)
     var chart = new Chart(ctx, {
       // The type of chart we want to create
       type: 'line',
-  
+
       // The data for our dataset
       data: {
-          labels: dates,
-          datasets: [{
-              label: 'Temperature',
-              backgroundColor: 'rgb(255, 99, 132)',
-              borderColor: 'rgb(255, 99, 132)',
-              data: temp
-          }]
+        labels: dates,
+        datasets: [{
+          label: 'Temperature',
+          backgroundColor: 'rgb(255, 99, 132)',
+          borderColor: 'rgb(255, 99, 132)',
+          data: temp,
+          // xAxisID: 'test'
+        }]
       },
-  
+
       // Configuration options go here
-      options: {}
+      options: {
+        scales: {
+          yAxes: [{
+            ticks: {
+              suggestedMin: 15,
+              suggestedMax: 20
+            }
+          }]
+        }
+      }
     });
   })
 
