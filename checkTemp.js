@@ -13,7 +13,7 @@ db.get(sql, [], (err, row) => {
     let msg, title
     msg = "Temperature: " + row.temperature + "°C"
     title = `\u26A0  ATTENTION BIERE `
-    if(row.temperature > 25) title += `\uD83D\uDD25`
+    if(row.temperature > 20) title += `\uD83D\uDD25`
     else title += `\u2744`
     
     pusher.note(process.env.EMAIL, title, msg, (err, _res) =>{
