@@ -8,7 +8,7 @@ var pusher = new pushbullet(process.env.PUSHBULLET_TOKEN)
 
 db.get(sql, [], (err, row) => {
   if (err) throw err;
-  console.log('row :', row);
+  // console.log('row :', row);
   if (row.etat === 0) {
     let msg, title
     msg = "Temperature: " + row.temperature + "°C"
@@ -16,7 +16,7 @@ db.get(sql, [], (err, row) => {
     if(row.temperature > 25) title += `\uD83D\uDD25`
     else title += `\u2744`
     
-    pusher.note(process.env.EMAIL, title, msg, (err, res) =>{
+    pusher.note(process.env.EMAIL, title, msg, (err, _res) =>{
       if (err) throw err;
     })
   }
