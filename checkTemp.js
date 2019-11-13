@@ -1,8 +1,9 @@
 const pushbullet = require('pushbullet')
 const sqlite3 = require('sqlite3').verbose()
-const db = new sqlite3.Database('./data.db')
+const path = require('path')
+const db = new sqlite3.Database(path.join(__dirname, './data.db'))
 const sql = `SELECT * FROM data ORDER BY id DESC LIMIT ${1}`
-require('dotenv').config()
+require('dotenv').config({path: path.join(__dirname, '.env')})
 
 var pusher = new pushbullet(process.env.PUSHBULLET_TOKEN)
 
@@ -18,6 +19,7 @@ db.get(sql, [], (err, row) => {
     
     pusher.note(process.env.EMAIL, title, msg, (err, _res) =>{
       if (err) throw err;
+      console.log('err :', err);
     })
   }
 })
