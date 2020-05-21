@@ -19,7 +19,7 @@ db.get(sql, [], (err, row) => {
     
     pusher.note(process.env.EMAIL, title, msg, (err, _res) =>{
       if (err) throw err;
-      console.log('err :', err);
+
     })
   }
 })
