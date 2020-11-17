@@ -71,7 +71,7 @@ app.get('/2-days', async function (_req, res) {
   db.all(`SELECT timestamp, temperature, humidite FROM data WHERE timestamp > ?`,[moment().tz("UTC").subtract(2, "days").format('YYYY-MM-DD H:mm:ss')],(err, rows) => {
     if (err) throw err;
     // console.log(rows)
-    res.send(rows.filter((_row, index) => index % 12 === 0))
+    res.send(rows.filter((_row, index) => index % 2 === 0))
   })
 })
 

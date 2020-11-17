@@ -36,10 +36,10 @@ fetch('/2-days')
     });
   })
 
-const tempsRestantBout = document.getElementById('tempsWeekReste')
-var dateBout = moment("2019-11-17")
-tempsRestantBout.textContent = dateBout.fromNow()
+// const tempsRestantBout = document.getElementById('tempsWeekReste')
+// var dateBout = moment("2019-11-17")
+// tempsRestantBout.textContent = dateBout.fromNow()
 
-const tempsRestantDegus = document.getElementById('tempsWeekResteDegus')
-var dateDegus = moment("2019-12-01")
-tempsRestantDegus.textContent = dateDegus.fromNow()
+// const tempsRestantDegus = document.getElementById('tempsWeekResteDegus')
+// var dateDegus = moment("2019-12-01")
+// tempsRestantDegus.textContent = dateDegus.fromNow()
